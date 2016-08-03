@@ -1,0 +1,13 @@
+container App: [
+  Hero: [
+    image: default.propTypes : 404,
+    title,
+    links: pas forcement les 3 présents,
+  ]
+]
+
+  ID: [
+    image,
+    title + desc,
+    list,
+  ]
