@@ -5,12 +5,13 @@ import Link from './link';
 const Links = ({ hero, links }) => {
   console.log('Links---hero : ', hero);
   console.log('Links---links : ', links);
+  const icon = 'TMP';
   const data = _.map(links, (link, id) =>
     <Link
       hero={ hero }
-      icon={ link.icon }
+      icon={ icon }
       link={ link.url }
-      name={ link.name }
+      name={ link.type }
       key={ id }
     />
   );

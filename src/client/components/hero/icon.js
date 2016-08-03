@@ -3,7 +3,7 @@ import React from 'react';
 const Icon = ({ icon }) => {
   console.log('Icon----icon : ', icon);
   return (
-    <span className={ icon }>Icone - { icon }</span>
+    <span className='icon'>{ icon }</span>
   );
 };
 
