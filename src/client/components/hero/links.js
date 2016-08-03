@@ -27,7 +27,7 @@ const Links = ({ hero, links }) => {
 
 Links.propTypes = {
   hero: React.PropTypes.string.isRequired,
-  links: React.PropTypes.object.isRequired,
+  links: React.PropTypes.array.isRequired,
 };
 
 export default Links;

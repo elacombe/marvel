@@ -1,0 +1,38 @@
+.app {
+     display: -webkit-flex;
+     display: flex;
+     width: 100%;
+     height: 100%;
+     background-color: lightgrey;
+     -webkit-flex-flow: row wrap;
+     margin: 1em;
+     padding: 1em;
+ }
+.heropage {
+     display: flex;
+     flex-wrap: wrap;
+     background-color: yellow;
+     border: 1px;
+     border-style: solid;
+     border-color: black;
+     padding: 1em;
+ }
+ .herobox {
+     background-color: deepskyblue;
+     margin: 1em;
+     padding: 1em;
+     border: 1px;
+     border-style: solid;
+     border-color: black;
+ }
+ .herodesc {
+     background-color: deepskyblue;
+     margin: 1em;
+     padding: 1em;
+     border: 1px;
+     border-style: solid;
+     border-color: black;
+ }
+ body {
+  padding: 2em;
+ }

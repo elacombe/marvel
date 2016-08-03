@@ -3,27 +3,29 @@ import Links from './links';
 import Pic from './pic';
 import Title from './title';
 
-const HeroBox = ({ hero, links, pic, title }) => {
+const HeroBox = ({ hero, links, pic, ...actions }) => {
   console.log('HeroBox----hero : ', hero);
   console.log('HeroBox----link : ', links);
   console.log('HeroBox----pic : ', pic);
-  console.log('HeroBox----title : ', title);
-  const classname = `HeroBox-${ hero }`;
+  const classname = `HeroBox-${ hero.name }`;
+
+  const handleClick = () => {
+    actions.onHeroClick(hero.id);
+  };
 
   return (
-    <div className='herobox'>
-      <Title title={ hero } />
+    <div className='herobox' onClick={ handleClick }>
+      <Title title={ hero.name } />
       <Pic pic={ pic } />
-      <Links hero={ hero } links={ links } />
+      <Links hero={ hero.name } links={ links } />
     </div>
   );
 };
 
 HeroBox.propTypes = {
-  hero: React.PropTypes.string.isRequired,
-  links: React.PropTypes.object.isRequired,
-  pic: React.PropTypes.string.isRequired,
-  title: React.PropTypes.string.isRequired,
+  hero: React.PropTypes.object.isRequired,
+  links: React.PropTypes.array.isRequired,
+  pic: React.PropTypes.object.isRequired,
 };
 
 export default HeroBox;
