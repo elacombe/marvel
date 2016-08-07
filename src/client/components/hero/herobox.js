@@ -7,7 +7,6 @@ const HeroBox = ({ hero, links, pic, ...actions }) => {
   console.log('HeroBox----hero : ', hero);
   console.log('HeroBox----link : ', links);
   console.log('HeroBox----pic : ', pic);
-  const classname = `HeroBox-${ hero.name }`;
 
   const handleClick = () => {
     actions.onHeroClick(hero.id);

@@ -19,13 +19,16 @@ const HeroDesc = ({ hero, ...actions }) => {
       <Pic pic={ hero.thumbnail } />
       <Title title={ hero.name } />
       <Title title={ hero.description } />
-      <ul>Comics
+      <span>Comics</span>
+      <ul>
       { comics }
       </ul>
-      <ul>Series
+      <span>Series</span>
+      <ul>
       { series }
       </ul>
-      <ul>Stories
+      <span>Stories</span>
+      <ul>
       { stories }
       </ul>
     </div>
