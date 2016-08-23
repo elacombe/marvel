@@ -2,9 +2,9 @@ import React from 'react';
 import _ from 'lodash';
 import HeroBox from './herobox';
 import HeroDesc from './herodesc';
+import { Link } from 'react-router';
 
 const HeroPage = ({ heroes, view, ...actions }) => {
-  console.log('HeroPage----heroes : ', heroes);
   if (view == false) {
     const data = _.map(heroes, (hero, id) =>
       <HeroBox

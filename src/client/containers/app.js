@@ -4,12 +4,11 @@ import HeroPage from '../components/hero/heropage';
 import Links from '../components/hero/links';
 import { changeView } from '../actions/hero';
 
-const App = ({ dispatch, heroes, view }) => {
-  console.log('App-------heroes', heroes);
-
+const App = ({ dispatch, heroes, routing, view }) => {
   const onHeroClick = (id) => {
     dispatch(changeView(id));
   };
+  console.log(routing);
 
   const actions = {
     onHeroClick,
@@ -29,4 +28,4 @@ App.propTypes = {
   view: React.PropTypes.bool.isRequired,
 };
 
-export default connect(state => ({ heroes: state.heroes, view: state.view }))(App);
+export default connect(state => ({ heroes: state.fetch.heroes, view: state.fetch.view, routing: state.routing.locationBeforeTransitions }))(App);

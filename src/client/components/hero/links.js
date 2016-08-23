@@ -3,8 +3,6 @@ import _ from 'lodash';
 import Link from './link';
 
 const Links = ({ hero, links }) => {
-  console.log('Links---hero : ', hero);
-  console.log('Links---links : ', links);
   const icon = 'TMP';
   const data = _.map(links, (link, id) =>
     <Link
@@ -15,7 +13,6 @@ const Links = ({ hero, links }) => {
       key={ id }
     />
   );
-  console.log('Links---data', data);
   const classname = `links-${ hero }`;
 
   return (

@@ -2,20 +2,21 @@ import React from 'react';
 import Links from './links';
 import Pic from './pic';
 import Title from './title';
+import { Link } from 'react-router';
 
 const HeroBox = ({ hero, links, pic, ...actions }) => {
-  console.log('HeroBox----hero : ', hero);
-  console.log('HeroBox----link : ', links);
-  console.log('HeroBox----pic : ', pic);
-
   const handleClick = () => {
     actions.onHeroClick(hero.id);
   };
 
+  const linkto = `/hero/${hero.id}`;
+
   return (
     <div className='herobox' onClick={ handleClick }>
+    <Link to={ linkto }>
       <Title title={ hero.name } />
       <Pic pic={ pic } />
+    </Link>
       <Links hero={ hero.name } links={ links } />
     </div>
   );

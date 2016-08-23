@@ -3,9 +3,9 @@ import Links from './links';
 import Pic from './pic';
 import Title from './title';
 import _ from 'lodash';
+import { Link } from 'react-router';
 
 const HeroDesc = ({ hero, ...actions }) => {
-  console.log(hero);
   const handleClick = () => {
     actions.onHeroClick(0);
   };
@@ -16,8 +16,10 @@ const HeroDesc = ({ hero, ...actions }) => {
 
   return (
     <div className='herodesc' onClick={ handleClick }>
+      <Link to='/heroes'>
       <Pic pic={ hero.thumbnail } />
       <Title title={ hero.name } />
+      </Link>
       <Title title={ hero.description } />
       <span>Comics</span>
       <ul>
