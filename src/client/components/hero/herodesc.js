@@ -14,10 +14,8 @@ class HeroDesc extends React.Component {
   }
 
   render() {
-    const hero = this.props.hero;
-
-    if (!this.props.hero) return <div className='herodesc' />;
-
+    const hero = this.props.hero[this.props.params.id];
+    if (!this.props.hero[this.props.params.id]) return <div className='herodesc' />;
     const comics = _.map(hero.comics.items, (comic, id) => <li key={ id }>{ comic.name }</li>);
     const series = _.map(hero.series.items, (series, id) => <li key={ id }>{ series.name }</li>);
     const stories = _.map(hero.stories.items, (stories, id) => <li key={ id }>{ stories.name }</li>);
@@ -55,4 +53,4 @@ const mapDispatchToProps = (dispatch) => ({
   },
 });
 
-export default connect(state => ({ hero: state.heroes[0] }), mapDispatchToProps)(HeroDesc);
+export default connect(state => ({ hero: state.heroes }), mapDispatchToProps)(HeroDesc);

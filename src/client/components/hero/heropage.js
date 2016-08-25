@@ -38,8 +38,4 @@ const mapDispatchToProps = (dispatch) => ({
   }
 });
 
-HeroPage.propTypes = {
-  heroes: React.PropTypes.object.isRequired,
-};
-
 export default connect(state => ({ heroes: state.heroes }), mapDispatchToProps)(HeroPage);
