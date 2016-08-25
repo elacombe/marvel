@@ -2,17 +2,23 @@ import React from 'react';
 import _ from 'lodash';
 import HeroBox from './herobox';
 import HeroDesc from './herodesc';
-import { Link } from 'react-router';
+import { connect } from 'react-redux';
+import { push } from 'redux-router';
+import { fetchHeroes, makeHeroes, workerAll } from '../../actions/fetch';
 
-const HeroPage = ({ heroes, view, ...actions }) => {
-  if (view == false) {
-    const data = _.map(heroes, (hero, id) =>
+class HeroPage extends React.Component {
+
+  componentWillMount() {
+    workerAll(this.props.makeHeroAll, this.props.fetchAll);
+  }
+  
+  render() {
+    const data = _.map(this.props.heroes, (hero, id) =>
       <HeroBox
         hero={ hero }
         key={ id }
         links={ hero.urls }
-        pic= { hero.thumbnail }
-        { ...actions }
+        pic={ hero.thumbnail }
       />
     );
     return (
@@ -20,18 +26,20 @@ const HeroPage = ({ heroes, view, ...actions }) => {
         { data }
       </div>
     );
-  };
-  return (
-    <HeroDesc
-      hero={ heroes[0] }
-      { ...actions }
-    />
-  );
+  }
 };
+
+const mapDispatchToProps = (dispatch) => ({
+  fetchAll: () => {
+    dispatch(fetchHeroes());
+  },
+  makeHeroAll: (results) => {
+    dispatch(makeHeroes(results));
+  }
+});
 
 HeroPage.propTypes = {
   heroes: React.PropTypes.object.isRequired,
-  view: React.PropTypes.bool.isRequired,
 };
 
-export default HeroPage;
+export default connect(state => ({ heroes: state.heroes }), mapDispatchToProps)(HeroPage);
