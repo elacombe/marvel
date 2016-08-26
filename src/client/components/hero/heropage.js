@@ -9,7 +9,7 @@ import { fetchHeroes, makeHeroes, workerAll } from '../../actions/fetch';
 class HeroPage extends React.Component {
 
   componentWillMount() {
-    workerAll(this.props.makeHeroAll, this.props.fetchAll);
+    this.props.dispatch(workerAll());
   }
   
   render() {
@@ -29,13 +29,4 @@ class HeroPage extends React.Component {
   }
 };
 
-const mapDispatchToProps = (dispatch) => ({
-  fetchAll: () => {
-    dispatch(fetchHeroes());
-  },
-  makeHeroAll: (results) => {
-    dispatch(makeHeroes(results));
-  }
-});
-
-export default connect(state => ({ heroes: state.heroes }), mapDispatchToProps)(HeroPage);
+export default connect(state => ({ heroes: state.heroes }))(HeroPage);

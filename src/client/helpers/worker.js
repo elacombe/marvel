@@ -1,6 +1,6 @@
 import { MAKE_HEROID } from '../actions/hero';
 
-export default function workerz ({ getState }) {
+export default function workerz ({ dispatch, getState }) {
   return (next) =>
   (action) => {
     const console = window.console;
@@ -11,7 +11,7 @@ export default function workerz ({ getState }) {
       /*case MAKE_HEROES:
         setState({ ...state, heroes: action.heroes });*/
       case MAKE_HEROID:
-        return { ...state, cache: { timestamp: { [action.results[0].id]: ts } } };
+        dispatch(makeHero(action.results));
       default:
         return returnValue;;
     }

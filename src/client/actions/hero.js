@@ -9,25 +9,31 @@ export const SETCACHE_TIME = 'SETCACHE_TIME';
 export const ADDTO_CACHE = 'ADDTO_CACHE';
 export const REMOVEFROM_CACHE = 'REMOVEFROM_CACHE';
 
+const vocalDebug = (name) => {
+  var beep = document.getElementById(name);
+  beep.play();
+}
+
 export const makeHero = (results) => {
   return { type: MAKE_HEROID, results }
 }
-export const makeHeroId = (results) => {
-  console.log('make hero id res = ', results.id);
+
+export const manageCache = (results) => {
   return (dispatch, getState) => {
     const { cache } = getState();
-    console.log(cache);
     if (cache[results.id]) {
       const check = Date.now();
       if ((check - cache.timestamp[results.id]) > 10000) {
         dispatch(removeFrom_Cache(results.id));
         dispatch(fetchHero(results));
+        const { cache } = getState();
       }
       if (cache[results.id].id === parseInt(results.id)) {
         dispatch(makeHero(cache[results.id]));
       }
-    }
-    dispatch(makeHero(results));
+    } else {
+        dispatch(makeHero(results));
+      }
   };
 };
 
@@ -41,6 +47,7 @@ export const addTo_Cache = (results) => {
 };
 
 export const removeFrom_Cache = (id) => {
+  vocalDebug('gone');
   return { type: REMOVEFROM_CACHE, id }
 };
 
@@ -51,29 +58,35 @@ export const fetchHero = (id) => {
       'Content-Type': 'application/json',
     },
   };
-  console.log('fetchHero----fetchOne');
+  console.log('I need a hero ! heeeero');
   const url = `http://gateway.marvel.com:80/v1/public/characters/${ id }${ marvelUrl() }`;
     return (dispatch) => {
+      vocalDebug('gone');
       fetch(url, method)
       .then(res => res.json())
       .then(res => {
-        dispatch(makeHeroId(res.data.results[0]));
+        dispatch(manageCache(res.data.results[0]));
         dispatch(addTo_Cache(res.data.results[0]));
         dispatch(setCacheTime(id));
-      });
+      })
+      .catch(err => { if (err) { vocalDebug('nan') } });
   };
 };
 
-export const workerOne = (makeHeroOne, data, fetchOne) => {
-    async.map(cacheOne, (hero, cb) => { if (parseInt(data) === hero.id) { cb(null, { match: true }) } else { cb(null, { match: false }) } }, (err, res) => {
+export const workerOne = (id) => {
+  return (dispatch, getState) => {
+    const { cache } = getState();
+    async.map(cache, (hero, cb) => { if (parseInt(id) === hero.id) { cb(null, { match: true }) } else { cb(null, { match: false }) } }, (err, res) => {
       if (err) {
+        console.log('err workerOne->async.map : ', err);
+        vocalDebug('mordu');
       }
-      if (res[data]) {
-        if (res[data].match === true) {
-          makeHeroOne(data);
+      if (res[id]) {
+        if (res[id].match === true) {
+          dispatch(manageCache(cache[id]));
         }
       } else {
-        fetchOne(data);
+        dispatch(fetchHero(id));
       }
     });
   };

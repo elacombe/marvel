@@ -10,7 +10,7 @@ import { fetchHero, workerOne, makeHeroId } from '../../actions/hero';
 class HeroDesc extends React.Component {
 
   componentWillMount() {
-    workerOne(this.props.makeHeroOne, this.props.params.id, this.props.fetchOne);
+    this.props.dispatch(workerOne(this.props.params.id));
   }
 
   render() {
@@ -43,14 +43,4 @@ class HeroDesc extends React.Component {
   }
 };
 
-
-const mapDispatchToProps = (dispatch) => ({
-  fetchOne: (id) => {
-    dispatch(fetchHero(id));
-  },
-  makeHeroOne: (results) => {
-    dispatch(makeHeroId(results));
-  },
-});
-
-export default connect(state => ({ hero: state.heroes }), mapDispatchToProps)(HeroDesc);
+export default connect(state => ({ hero: state.heroes }))(HeroDesc);

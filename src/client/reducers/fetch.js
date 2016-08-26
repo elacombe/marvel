@@ -1,4 +1,4 @@
-import { MADE_FETCH, MAKE_HEROES } from '../actions/fetch';
+import { MAKE_HEROES } from '../actions/fetch';
 import { MAKE_HEROID, SETCACHE_TIME, ADDTO_CACHE, REMOVEFROM_CACHE } from '../actions/hero';
 import _ from 'lodash';
 
@@ -37,10 +37,6 @@ export default function fetch(state = initialState, action) {
             },
           },
     };
-  case MADE_FETCH:
-    return {
-      ...state,
-    };
   case MAKE_HEROES:
     return {
       ...state,
@@ -49,7 +45,7 @@ export default function fetch(state = initialState, action) {
   case MAKE_HEROID:
     return {
       ...state,
-      heroes: { [action.results.id]: { ...action.results} },
+      heroes: { [action.results.id]: action.results},
     }
   default:
     return state;
